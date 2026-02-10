@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sree 💕 Valentine</title>
+
+<style>
+* { box-sizing: border-box; font-family: 'Comic Sans MS', cursive; }
+
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #ffd1e8, #fff);
+  overflow: hidden;
+}
+
+.page {
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  padding: 30px 15px;
+  text-align: center;
+}
+
+.page.active { display: block; }
+
+h1, h2 { color: #ff2f92; }
+p { color: #444; font-size: 1.1rem; line-height: 1.6; }
+
+.btn {
+  padding: 15px 30px;
+  border-radius: 30px;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.yes { background: #ff2f92; color: white; }
+.no { background: #ccc; position: absolute; }
+
+.dogs {
+  font-size: 3rem;
+  cursor: pointer;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.heart {
+  position: fixed;
+  bottom: 0;
+  animation: float 4s linear forwards;
+  font-size: 20px;
+}
+
+@keyframes float {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-100vh); opacity: 0; }
+}
+
+.balloon {
+  position: fixed;
+  bottom: -50px;
+  font-size: 2rem;
+  animation: rise 6s linear forwards;
+}
+
+@keyframes rise {
+  to { bottom: 110%; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 BACKGROUND MUSIC -->
+<audio id="bgm" loop>
+  <source src="https://cdn.pixabay.com/audio/2023/02/28/audio_4d1a6dfb6b.mp3" type="audio/mpeg">
+</audio>
+
+<!-- 🐕 DOG SOUND -->
+<audio id="dogSound">
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_3e7c1b6a91.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGE 1 -->
+<div class="page active">
+  <h1>Sree 💕</h1>
+  <p>I made this little website only for you 🌸</p>
+  <div class="dogs" onclick="dogClick()">🐕🐶🐕‍🦺</div>
+  <p id="dogText">Tap the dogs 👆</p>
+  <button class="btn yes" onclick="nextPage()">Next ➡️</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <h2>Things I Love About You 💖</h2>
+  <p>
+    🌷 Your smile<br>
+    🎈 Your kindness<br>
+    🎂 Your sweetness<br>
+    🐕 The way you make my world better
+  </p>
+  <button class="btn yes" onclick="nextPage()">Next ➡️</button>
+</div>
+
+<!-- PAGE 3 – BENGALI LOVE LETTER -->
+<div class="page">
+  <h2>একটা ছোট চিঠি তোমার জন্য 💌</h2>
+  <p>
+    প্রিয় Sree,<br><br>
+    তুমি আমার জীবনে আসার পর থেকে সবকিছু একটু বেশি সুন্দর হয়ে গেছে।  
+    তোমার হাসি, তোমার যত্ন, আর তোমার উপস্থিতি — সব মিলিয়ে তুমি আমার কাছে খুব special।<br><br>
+    আমি বড় বড় কথা বলার মানুষ নই, কিন্তু একটা জিনিস খুব সহজভাবে বলতে পারি —  
+    তোমাকে আমার জীবনে পেয়ে আমি সত্যিই খুব খুশি।<br><br>
+    ধীরে ধীরে, নিজের মতো করে, আমি তোমার সাথেই সবকিছু ভাগ করে নিতে চাই। 💕
+  </p>
+  <button class="btn yes" onclick="nextPage()">Next ➡️</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <h2>Big Question 💘</h2>
+  <p>Will you be my Valentine, Sree? 🌷🐕</p>
+  <button class="btn yes" onclick="sayYes()">YES 💖</button>
+  <button class="btn no" onmouseover="runAway(this)">No 🙈</button>
+</div>
+
+<!-- PAGE 5 FINAL -->
+<div class="page">
+  <h1>YAYYYYY 💕🎉</h1>
+  <p>
+    You just made me the happiest person 🥹💖<br><br>
+    🌸 See you on Valentine’s Day 🌸<br>
+    I can’t wait to spend that day with you, Sree 🐕🎈
+  </p>
+</div>
+
+<script>
+let pageIndex = 0;
+const pages = document.querySelectorAll(".page");
+const bgm = document.getElementById("bgm");
+const dogSound = document.getElementById("dogSound");
+
+function nextPage() {
+  pages[pageIndex].classList.remove("active");
+  pageIndex++;
+  pages[pageIndex].classList.add("active");
+  bgm.play();
+}
+
+function dogClick() {
+  dogSound.play();
+  document.getElementById("dogText").innerText =
+    ["ভাউ ভাউ! 🐕😍", "Sree best! 💕", "Dog approves this love 🐶"].sort(() => 0.5 - Math.random())[0];
+}
+
+function sayYes() {
+  hearts(40);
+  nextPage();
+}
+
+function runAway(btn) {
+  btn.style.left = Math.random() * 80 + "vw";
+  btn.style.top = Math.random() * 80 + "vh";
+}
+
+function hearts(n) {
+  for (let i = 0; i < n; i++) {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerText = "💖";
+    h.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 4000);
+  }
+}
+
+setInterval(() => {
+  const b = document.createElement("div");
+  b.className = "balloon";
+  b.innerText = "🎈";
+  b.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(b);
+  setTimeout(() => b.remove(), 6000);
+}, 1500);
+</script>
+
+</body>
+</html>
+ 
